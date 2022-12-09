@@ -23,8 +23,8 @@ export default function PostForm({ savePost, post }) {
      */
     function handleImageChange(event) {
         const file = event.target.files[0];
-        if (file.size < 500000000) {
-            // image file size must be below 0,5MB
+        if (file.size < 42000000) {
+            // image file size must be below 5MB
             const reader = new FileReader();
             reader.onload = event => {
                 setImage(event.target.result);

@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "afg-exam-2022",
-    "exam": "afg-exam-2022"
+    "default": "afg-exam-2022-spa1",
+    "exam": "afg-exam-2022-spa1"
   },
   "targets": {},
   "etags": {}
