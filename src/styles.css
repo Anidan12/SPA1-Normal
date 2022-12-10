@@ -13,7 +13,7 @@ body {
     color: var(--text-color-dark);
     padding: 0;
     margin: 0;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: 'Edu TAS Beginner', cursive;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
