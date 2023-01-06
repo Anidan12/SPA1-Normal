@@ -5,6 +5,7 @@ export default function PostForm({ savePost, post }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
+     const [imageFile, setImageFile] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
@@ -25,6 +26,7 @@ export default function PostForm({ savePost, post }) {
         const file = event.target.files[0];
         if (file.size < 42000000) {
             // image file size must be below 5MB
+            setImageFile(file);
             const reader = new FileReader();
             reader.onload = event => {
                 setImage(event.target.result);
@@ -37,12 +39,29 @@ export default function PostForm({ savePost, post }) {
         }
     }
 
-    function handleSubmit(event) {
+     async function uploadImage() {
+        //url to new image. "race-crud-rest" should be replaced with own firebase project id
+        const url = `https://firebasestorage.googleapis.com/v0/b/afg-exam-2022-spa1.appspot.com/o/${imageFile.name}`;
+        // POST request to upload image
+        const response = await fetch(url, {
+            method: "POST",
+            body: imageFile,
+            headers: { "Content-Type": imageFile.type }
+        });
+        const data = await response.json();
+        console.log(data); // data response from image upload
+        const imageUrl = `${url}?alt=media`;
+        return imageUrl;
+    }
+    
+    async function handleSubmit(event) {
         event.preventDefault();
+        const imageUrl = await uploadImage();
         const formData = {
             // create a new objebt to store the value from states / input fields
+            // using "imageUrl" pointing to uploaded image file instead of "image" state
             title: title,
-            image: image,
+            image: imageUrl,
             body: body
         };
 
